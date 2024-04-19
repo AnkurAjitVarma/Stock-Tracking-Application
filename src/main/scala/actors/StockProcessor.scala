@@ -21,7 +21,7 @@ import scala.util.{Failure, Success}
 object StockProcessor {
 
   def apply(): Behavior[ProcessorMessage] = Behaviors setup  { context =>
-    lazy val writer = context.spawn(CsvWriter(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))), "csv-writer")
+    lazy val writer = context.spawn(CsvWriter(), "csv-writer")
     lazy val table = context.spawn(RecordKeeper(), "table")
 
     Behaviors receiveMessage {
